@@ -6,7 +6,7 @@ MODEL_NAME_OR_PATH='bert-base-chinese'
 OUTPUT_DIR='../datasets/'
 LABEL='../datasets/cluener/labels.txt'
 
-CUDA_VISIBLE_DEVICES='1' python ../examples/run_crf_ner.py \
+CUDA_VISIBLE_DEVICES='0,1' python ../examples/run_crf_ner.py \
 --data_dir $DATA_DIR \
 --model_type $MODEL_TYPE \
 --model_name_or_path $MODEL_NAME_OR_PATH \
