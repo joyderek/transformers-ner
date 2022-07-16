@@ -52,7 +52,7 @@ logger = logging.getLogger(__name__)
 
 MODEL_CONFIG_CLASSES = list(MODEL_FOR_CRF_NER_MAPPING.keys())
 MODEL_TYPES = tuple(conf.model_type for conf in MODEL_CONFIG_CLASSES)
-ALL_MODELS = sum((tuple(conf.pretrained_config_archive_map.keys()) for conf in MODEL_CONFIG_CLASSES), ())
+# ALL_MODELS = sum((tuple(conf.pretrained_config_archive_map.keys()) for conf in MODEL_CONFIG_CLASSES), ())
 TOKENIZER_ARGS = ["do_lower_case", "strip_accents", "keep_accents", "use_fast"]
 
 
@@ -446,7 +446,7 @@ def main():
         default=None,
         type=str,
         required=True,
-        help="Path to pre-trained model or shortcut name selected in the list: " + ", ".join(ALL_MODELS),
+        help="Path to pre-trained model or shortcut name selected in the list:"
     )
     parser.add_argument(
         "--output_dir",

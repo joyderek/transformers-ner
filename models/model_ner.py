@@ -3,7 +3,6 @@ from collections import OrderedDict
 from transformers import BertConfig, AlbertConfig, ElectraConfig, RobertaConfig
 from transformers import XLMConfig, DistilBertConfig, CamembertConfig, XLMRobertaConfig
 from transformers import AutoConfig, PretrainedConfig
-
 from models.albert_ner import AlbertCrfForNer, AlbertSoftmaxForNer, AlbertSpanForNer
 from models.bert_ner import BertCrfForNer, BertSoftmaxForNer, BertSpanForNer
 from models.electra_ner import ElectraCrfForNer, ElectraSoftmaxForNer, ElectraSpanForNer
@@ -26,7 +25,7 @@ MODEL_FOR_SOFTMAX_NER_MAPPING = OrderedDict(
 
 MODEL_FOR_CRF_NER_MAPPING = OrderedDict(
     [
-        (XLMConfig, XLMCrfForNer),
+        # (XLMConfig, XLMCrfForNer),
         (DistilBertConfig, DistilBertCrfForNer),
         (RobertaConfig, RobertaCrfForNer),
         (CamembertConfig, RobertaCrfForNer),

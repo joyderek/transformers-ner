@@ -1,10 +1,10 @@
 #!/bin/bash
 
-DATA_DIR=''
-MODEL_TYPE=''
-MODEL_NAME_OR_PATH=''
-OUTPUT_DIR=''
-LABEL=''
+DATA_DIR='../datasets/cluener/'
+MODEL_TYPE='bert'
+MODEL_NAME_OR_PATH='bert-base-chinese'
+OUTPUT_DIR='../datasets/'
+LABEL='../datasets/cluener/labels.txt'
 
 CUDA_VISIBLE_DEVICES='1' python ../examples/run_crf_ner.py \
 --data_dir $DATA_DIR \
