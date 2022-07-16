@@ -18,7 +18,7 @@ CUDA_VISIBLE_DEVICES='0,1' python ../examples/run_crf_ner.py \
 --evaluate_during_training \
 --adv_training fgm \
 --num_train_epochs 3 \
---max_seq_length 512 \
+--max_seq_length 256 \
 --logging_steps 0.2 \
 --per_gpu_train_batch_size 16 \
 --per_gpu_eval_batch_size 16 \
