@@ -1,10 +1,10 @@
 #!/bin/bash
 
-DATA_DIR='../datasets/cluener/'
+DATA_DIR='../../data/'
 MODEL_TYPE='bert'
 MODEL_NAME_OR_PATH='bert-base-chinese'
 OUTPUT_DIR='../datasets/'
-LABEL='../datasets/cluener/labels.txt'
+LABEL='../../data/labels.txt'
 
 CUDA_VISIBLE_DEVICES='0,1' python ../examples/run_crf_ner.py \
 --data_dir $DATA_DIR \
@@ -18,7 +18,7 @@ CUDA_VISIBLE_DEVICES='0,1' python ../examples/run_crf_ner.py \
 --evaluate_during_training \
 --adv_training fgm \
 --num_train_epochs 3 \
---max_seq_length 128 \
+--max_seq_length 512 \
 --logging_steps 0.2 \
 --per_gpu_train_batch_size 16 \
 --per_gpu_eval_batch_size 16 \
