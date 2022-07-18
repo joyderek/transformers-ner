@@ -311,29 +311,32 @@ def evaluate(args, model, tokenizer, labels, pad_token_label_id, mode, prefix=""
     model.eval()
     for batch in tqdm(eval_dataloader, desc="Evaluating"):
         batch = tuple(t.to(args.device) for t in batch)
+        try:
 
-        with torch.no_grad():
-            inputs = {"input_ids": batch[0],
-                      "attention_mask": batch[1],
-                      "valid_mask": batch[2],
-                      "labels": batch[4],
-                      "decode": True}
-            if args.model_type != "distilbert":
-                inputs["token_type_ids"] = (
-                    batch[2] if args.model_type in ["bert", "xlnet"] else None
-                )  # XLM and RoBERTa don"t use segment_ids
-            outputs = model(**inputs)
-            tmp_eval_loss, tags = outputs[:2]
-            if args.n_gpu > 1:
-                tmp_eval_loss = tmp_eval_loss.mean()  # mean() to average on multi-gpu parallel evaluating
-            eval_loss += tmp_eval_loss.item()
-        nb_eval_steps += 1
-        if preds is None:
-            preds = tags.detach().cpu().numpy()
-            trues = inputs["labels"].detach().cpu().numpy()
-        else:
-            preds = np.append(preds, tags.detach().cpu().numpy(), axis=0)
-            trues = np.append(trues, inputs["labels"].detach().cpu().numpy(), axis=0)
+            with torch.no_grad():
+                inputs = {"input_ids": batch[0],
+                          "attention_mask": batch[1],
+                          "valid_mask": batch[2],
+                          "labels": batch[4],
+                          "decode": True}
+                if args.model_type != "distilbert":
+                    inputs["token_type_ids"] = (
+                        batch[2] if args.model_type in ["bert", "xlnet"] else None
+                    )  # XLM and RoBERTa don"t use segment_ids
+                outputs = model(**inputs)
+                tmp_eval_loss, tags = outputs[:2]
+                if args.n_gpu > 1:
+                    tmp_eval_loss = tmp_eval_loss.mean()  # mean() to average on multi-gpu parallel evaluating
+                eval_loss += tmp_eval_loss.item()
+            nb_eval_steps += 1
+            if preds is None:
+                preds = tags.detach().cpu().numpy()
+                trues = inputs["labels"].detach().cpu().numpy()
+            else:
+                preds = np.append(preds, tags.detach().cpu().numpy(), axis=0)
+                trues = np.append(trues, inputs["labels"].detach().cpu().numpy(), axis=0)
+        except:
+            print(preds)
 
     eval_loss = eval_loss / nb_eval_steps
     label_map = {i: label for i, label in enumerate(labels)}
