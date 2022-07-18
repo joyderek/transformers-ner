@@ -1,8 +1,8 @@
 #!/bin/bash
 
 DATA_DIR='../../data/'
-MODEL_TYPE='bert'
-MODEL_NAME_OR_PATH='bert-base-chinese'
+MODEL_TYPE='albert'
+MODEL_NAME_OR_PATH='voidful/albert_chinese_tiny'
 OUTPUT_DIR='../datasets/'
 LABEL='../../data/labels.txt'
 

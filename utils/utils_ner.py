@@ -60,6 +60,9 @@ def read_examples_from_file(data_dir, mode):
                     labels.append("O")
         if words:
             examples.append(InputExample(guid="{}-{}".format(mode, guid_index), words=words, labels=labels))
+        if(len(words)!=len(labels)):
+            print(line)
+            raise ValueError
     return examples
 
 
@@ -100,8 +103,11 @@ def convert_examples_to_features(
 
         tokens = []
         valid_mask = []
+        assert len(example.words) == len(example.labels)
         for word in example.words:
             word_tokens = tokenizer.tokenize(word)
+            if(len(word_tokens)==0):
+                print(word,word_tokens)
             # bert-base-multilingual-cased sometimes output "nothing ([]) when calling tokenize with just a space.
             for i, word_token in enumerate(word_tokens):
                 if i == 0:
@@ -110,6 +116,12 @@ def convert_examples_to_features(
                     valid_mask.append(0)
                 tokens.append(word_token)
         label_ids = [label_map[label] for label in example.labels]
+        if(len(tokens)!=len(label_ids)):
+            print(len(tokens))
+            print(len(label_ids))
+            print(len(example.words))
+            print(len(example.labels))
+            raise ValueError
         entities = get_entities(example.labels)
         start_ids = [span_map['O']] * len(label_ids)
         end_ids = [span_map['O']] * len(label_ids)
