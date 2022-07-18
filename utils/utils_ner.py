@@ -109,7 +109,7 @@ def convert_examples_to_features(
             if(len(word_tokens)==0):
                 print(word,word_tokens)
                 valid_mask.append(1)
-                tokens.append(1)
+                tokens.append('[unused1]')
             else:
                 # bert-base-multilingual-cased sometimes output "nothing ([]) when calling tokenize with just a space.
                 for i, word_token in enumerate(word_tokens):
