@@ -348,7 +348,10 @@ def evaluate(args, model, tokenizer, labels, pad_token_label_id, mode, prefix=""
         for j in range(trues.shape[1]):
             if trues[i, j] != pad_token_label_id:
                 trues_list[i].append(label_map[trues[i][j]])
-                preds_list[i].append(label_map[preds[i][j]])
+                try:
+                    preds_list[i].append(label_map[preds[i][j]])
+                except:
+                    preds_list[i].append(label_map[0])
 
     true_entities = get_entities_bio(trues_list)
     pred_entities = get_entities_bio(preds_list)
