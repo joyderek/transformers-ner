@@ -108,13 +108,16 @@ def convert_examples_to_features(
             word_tokens = tokenizer.tokenize(word)
             if(len(word_tokens)==0):
                 print(word,word_tokens)
-            # bert-base-multilingual-cased sometimes output "nothing ([]) when calling tokenize with just a space.
-            for i, word_token in enumerate(word_tokens):
-                if i == 0:
-                    valid_mask.append(1)
-                else:
-                    valid_mask.append(0)
-                tokens.append(word_token)
+                valid_mask.append(1)
+                tokens.append(1)
+            else:
+                # bert-base-multilingual-cased sometimes output "nothing ([]) when calling tokenize with just a space.
+                for i, word_token in enumerate(word_tokens):
+                    if i == 0:
+                        valid_mask.append(1)
+                    else:
+                        valid_mask.append(0)
+                    tokens.append(word_token)
         label_ids = [label_map[label] for label in example.labels]
         if(len(tokens)!=len(label_ids)):
             print(len(tokens))
