@@ -491,7 +491,7 @@ def main():
         help="The maximum total input sequence length after tokenization. Sequences longer "
              "than this will be truncated, sequences shorter will be padded.",
     )
-    parser.add_argument("--do_train", default=True, action="store_true", help="Whether to run training.")
+    parser.add_argument("--do_train", default=False, action="store_true", help="Whether to run training.")
     parser.add_argument("--do_eval", default=True, action="store_true", help="Whether to run eval on the dev set.")
     parser.add_argument("--do_predict", action="store_true", help="Whether to run predictions on the test set.")
     parser.add_argument(
