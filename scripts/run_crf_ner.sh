@@ -13,8 +13,6 @@ CUDA_VISIBLE_DEVICES='0,1' python ../examples/run_crf_ner.py \
 --output_dir $OUTPUT_DIR \
 --labels $LABEL \
 --overwrite_output_dir \
---do_train \
---do_eval \
 --do_predict \
 --evaluate_during_training \
 --adv_training fgm \
